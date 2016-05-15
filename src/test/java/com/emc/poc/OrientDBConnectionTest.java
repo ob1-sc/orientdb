@@ -10,11 +10,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 
 /**
- * OrientDB POC Testing and Investigation.
+ * OrientDB POC Testing and Investigation:
+ *
+ * Connection Testing
  *
  * @author Simon O'Brien
  */
-public class OrientDBTest {
+public class OrientDBConnectionTest {
 
     public static final String DB_URL = "remote:localhost:2424/";
     public static final String DB_NAME = "testing";
