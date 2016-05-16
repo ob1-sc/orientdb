@@ -4,7 +4,7 @@ import com.orientechnologies.orient.core.exception.OConfigurationException;
 import com.orientechnologies.orient.core.exception.OSecurityAccessException;
 import com.tinkerpop.blueprints.impls.orient.OrientGraph;
 import com.tinkerpop.blueprints.impls.orient.OrientGraphFactory;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
@@ -26,7 +26,7 @@ public class OrientDBConnectionTest {
     public static final String DB_ROOT_PASSWORD = "dev";
 
     /**
-     * Test that user can connect to db
+     * TestA that person can connect to db
      */
     @Test
     public void connectionTest(){
@@ -50,7 +50,7 @@ public class OrientDBConnectionTest {
     }
 
     /**
-     * Test that root user can connect to db
+     * TestA that root person can connect to db
      */
     @Test
     public void connectionTestRootUser(){
@@ -74,9 +74,9 @@ public class OrientDBConnectionTest {
     }
 
     /**
-     * Test if invalid user can connect to db
+     * TestA if invalid person can connect to db
      */
-    @Test(expected=OSecurityAccessException.class)
+    @Test(expectedExceptions = OSecurityAccessException.class)
     public void connectionTestInvalidUser() {
 
         OrientGraphFactory factory = new OrientGraphFactory(DB_URL + DB_NAME, "invaliduser", DB_PASSWORD);
@@ -84,9 +84,9 @@ public class OrientDBConnectionTest {
     }
 
     /**
-     * Test if root user can connect to db that doesn't exist
+     * TestA if root person can connect to db that doesn't exist
      */
-    @Test(expected=OConfigurationException.class)
+    @Test(expectedExceptions = OConfigurationException.class)
     public void connectionTestInvalidDB(){
 
         OrientGraphFactory factory = new OrientGraphFactory(DB_URL + "invaliddb", DB_ROOT_USERNAME, DB_ROOT_PASSWORD);

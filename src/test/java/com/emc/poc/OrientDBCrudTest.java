@@ -4,10 +4,8 @@ import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.orient.OrientGraph;
-import com.tinkerpop.blueprints.impls.orient.OrientGraphFactory;
 import org.apache.commons.lang.RandomStringUtils;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -18,44 +16,10 @@ import static org.hamcrest.Matchers.notNullValue;
  *
  * @author Simon O'Brien
  */
-public class OrientDBCrudTest {
-
-    public static final String DB_URL = "remote:localhost:2424/";
-    public static final String DB_NAME = "testing";
-    public static final String DB_USERNAME = "admin";
-    public static final String DB_PASSWORD = "admin";
-    public static final String DB_ROOT_USERNAME = "root";
-    public static final String DB_ROOT_PASSWORD = "dev";
-
-    private OrientGraph txGraph = null;
+public class OrientDBCrudTest extends BaseEECloudTest {
 
     /**
-     * Set the DB connection after each test
-     */
-    @Before
-    public void setup() {
-
-        OrientGraphFactory factory = new OrientGraphFactory(DB_URL + DB_NAME, DB_USERNAME, DB_PASSWORD);
-        setTxGraph(factory.getTx());
-
-        assertThat(getTxGraph(), notNullValue());
-    }
-
-    /**
-     * Close the DB connection after each test
-     */
-    public void tearDown() {
-
-        OrientGraph txGraph = getTxGraph();
-
-        if(txGraph != null) {
-            txGraph.shutdown();
-        }
-    }
-
-
-    /**
-     * Test to create a simple Vertex
+     * TestA to create a simple Vertex
      */
     @Test
     public void simpleVertexCreationTest() {
@@ -77,7 +41,7 @@ public class OrientDBCrudTest {
     }
 
     /**
-     * Test to create a simple Edge between two Vertices
+     * TestA to create a simple Edge between two Vertices
      */
     @Test
     public void simpleEdgeCreationTest() {
@@ -105,23 +69,5 @@ public class OrientDBCrudTest {
         Vertex vertexOut = getEdge.getVertex(Direction.OUT);
         assertThat(vertexOut, notNullValue());
         assertThat(vertexOut.getId(), equalTo(vertex1.getId()));
-    }
-
-    /**
-     * Get the transactional orient graph DB
-     *
-     * @return the transactional orient graph DB
-     */
-    public OrientGraph getTxGraph() {
-        return txGraph;
-    }
-
-    /**
-     * Set the transactional orient graph DB
-     *
-     * @param txGraph the transactional orient graph DB
-     */
-    public void setTxGraph(OrientGraph txGraph) {
-        this.txGraph = txGraph;
     }
 }
